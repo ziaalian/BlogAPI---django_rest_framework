@@ -39,16 +39,31 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'allauth', # new 
+    'allauth.account', # new
+    'allauth.socialaccount', # new
+    'dj_rest_auth',
+    'dj_rest_auth.registration', # new
+    'django.contrib.sites',
 
+    # Local
     'posts',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new 
+SITE_ID = 1 # new
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [ # new 
+        'rest_framework.authentication.SessionAuthentication', 
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 MIDDLEWARE = [
